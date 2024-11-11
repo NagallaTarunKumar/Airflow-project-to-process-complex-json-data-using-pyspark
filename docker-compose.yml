@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+
+  airflow-project: # airflow-project is the image I gave while building docker image
+
+    image: airflow-project:latest
+    
+    volumes:
+      - ./airflow:/opt/airflow
+
+    ports:
+      - "8080:8080"
+
+    command: airflow standalone
+  

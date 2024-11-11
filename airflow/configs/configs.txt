@@ -1,0 +1,5 @@
+[source]
+path = E:\TARUN\airflowPracticeData\complex_data
+
+[destination]
+path = E:\TARUN\airflowPracticeData\processed_data
