@@ -2,12 +2,10 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.utils.dates import days_ago
 from datetime import timedelta, datetime
-from airflow.models import variable
-from pyspark.sql import SparkSession;
+from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, explode, expr
 from pyspark import SparkContext
 import configparser
-import sys
 import os
 import logging
 
@@ -97,7 +95,7 @@ def transform_complex_data(**kwargs):
                 .csv(output_file_path)
 
                 logging.info(f"Processed data written to: {output_file_path}")
-                
+
         except Exception as e:
             logging.error(f"Error processing {file}: {str(e)}")
 
