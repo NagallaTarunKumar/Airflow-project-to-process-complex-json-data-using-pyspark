@@ -47,22 +47,22 @@ def transform_complex_data(**kwargs):
     
 
     if new_files:
+        # Define spark session
+        spark = SparkSession.builder\
+            .master("yarn")\
+            .appName("Airflow_project")\
+            .master("local[*]")\
+            .getOrCreate()
+        
         try:
             for file in new_files:
-                # Define spark session
-                spark = SparkSession.builder\
-                .master("yarn")\
-                .appName("Airflow_project")\
-                .master("local[*]")\
-                .getOrCreate()
-
                 # Read data from the source
                 df = spark.read\
                 .format("json")\
                 .option("multiline","true")\
                 .option("header","true")\
                 .option("inferschema","true")\
-                .load(os.path.join(raw_data_files,file))
+                .load(os.path.join(source_path,file))
 
                 #Process the data
                 processed_df = df.withColumn("accounting",explode(col("accounting")))\
